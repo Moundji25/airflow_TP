@@ -59,13 +59,6 @@ call_webservice_1_task = PythonOperator(
     dag=dag
 )
 
-call_webservice_1_task = PythonOperator(
-    task_id='call_webservice_1_task',
-    python_callable=call_webservice_1,
-    #op_args=[wsdl_url, parameters],
-    dag=dag
-)
-
 read_json_task = PythonOperator(
     task_id='read_json_task',
     python_callable=read_json_file,
