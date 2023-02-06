@@ -33,7 +33,7 @@ def call_webservice_3(wsdl_url, parameters, **kwargs):
     client = Client(wsdl_url)
 
     # Appeler la méthode du service web en passant les paramètres
-    result = client.ServiceIdAuteur.auteur(parameters)
+    result = client.service.auteur(parameters)
 
     # Afficher le résultat
     print(result)
