@@ -11,9 +11,9 @@ def read_json_file(file_path, **kwargs):
     # Code pour lire le fichier JSON et parcourir les éléments
     # ...
     print("JSON FILE TASK")
-    '''with open(file_path, 'r') as json_file:
+    with open(file_path, 'r') as json_file:
         data = json.load(json_file)
-        return data'''
+        return data
 
 # Définir les quatre tâches qui effectuent les appels aux services Web
 def call_webservice_1(**kwargs):
@@ -62,6 +62,7 @@ call_webservice_1_task = PythonOperator(
 read_json_task = PythonOperator(
     task_id='read_json_task',
     python_callable=read_json_file,
+    op_args=["root/airflow/test/v.json"],
     dag=dag
 )
 
