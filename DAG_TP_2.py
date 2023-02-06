@@ -2,8 +2,6 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.operators.bash import BashOperator
 from suds.client import Client
-from zeep import Client, Settings
-from zeep.exceptions import Fault
 
 from airflow.operators.python_operator import PythonOperator
 import json
@@ -32,10 +30,7 @@ def call_webservice_2(**kwargs):
 def call_webservice_3(wsdl_url, parameters, **kwargs):
     # Code pour effectuer l'appel au service Web 3
     # ...
-    settings = Settings(strict=False, xml_huge_tree=True)
-    client = Client(wsdl_url, settings=settings)
-
-    #client = Client(wsdl_url)
+    client = Client(wsdl_url)
 
     # Appeler la méthode du service web en passant les paramètres
     result = client.ServiceIdAuteur.auteur(parameters)
