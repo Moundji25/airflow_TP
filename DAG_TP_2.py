@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.decorators import task
 from airflow.operators.bash import BashOperator
+from suds.client import Client
 
 from airflow.operators.python_operator import PythonOperator
 import json
@@ -29,7 +30,15 @@ def call_webservice_2(**kwargs):
 def call_webservice_3(wsdl_url, parameters, **kwargs):
     # Code pour effectuer l'appel au service Web 3
     # ...
-    print("WEBSERVICE 3")
+    client = Client(wsdl_url)
+
+    # Appeler la méthode du service web en passant les paramètres
+    result = client.ServiceIdAuteur.auteur(parameters)
+
+    # Afficher le résultat
+    print(result)
+
+    #print("WEBSERVICE 3")
 
 # Définir le DAG
 dag = DAG(
@@ -41,7 +50,7 @@ dag = DAG(
 call_webservice_3_task = PythonOperator(
     task_id='call_webservice_3_task',
     python_callable=call_webservice_3,
-    #op_args=[wsdl_url, parameters],
+    op_args=["http://localhost:8012/ServiceIdAuteur/?wsdl", 'versailles.json'],
     dag=dag
 )
 
